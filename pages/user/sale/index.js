@@ -11,6 +11,7 @@ import { StateContext } from '../../../Context/StateContext';
 import SnackbarTag from '../../../Components/Snackbar/Snackbar';
 import { columns_sale } from '../../../Components/DataTabel/Sales/Column';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import Link from "next/link";
 
 const Sales = () => {
   const router = useRouter();
@@ -20,7 +21,10 @@ const Sales = () => {
   useEffect(() => {
     axios.post('/api/Medicine/fetch', { uid: auth.currentUser.uid })
       .then((res) => {
-        setMedicineData(res.data.sales)
+          if (res.data.sales){
+              setMedicineData(res.data.sales)
+          }
+
       })
   }, [])
 
@@ -40,8 +44,8 @@ const Sales = () => {
             </div>
           </div>
           {medicineData.length !== 0 ? <DataTable data={medicineData} col={columns_sale} /> : <>
-            <h2 style={{ opacity: ".5" }}>You haven't sold any medicine yet.</h2>
-            <span style={{ opacity: '.5', fontWeight: '500' }}>Click here for sell medicine - <a href='/user/sale-medicine' style={{ color: 'blue' }}>sell medicine</a></span>
+            <h2 style={{ opacity: ".5" }}>You haven&apos;t sold any medicine yet.</h2>
+            <span style={{ opacity: '.5', fontWeight: '500' }}>Click here for sell medicine - <Link href='/user/sale-medicine' style={{ color: 'blue' }}>sell medicine</Link></span>
           </>}
         </div>
       </div>

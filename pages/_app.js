@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import Home from '.';
 import TopLayout from '../Components/TopLayout/TopLayout';
-import login from './login';
+import Login from './login';
 import SignUp from './signup';
 import SideLayout from '../Components/SideLayout/SideLayout';
 import AuthProvider from '../firebase/Context/AuthContext';
@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }) {
         </AuthProvider>
       );
     }
-    case (login):
+    case (Login):
       return (
         <AuthProvider>
           <StateContextProvider>

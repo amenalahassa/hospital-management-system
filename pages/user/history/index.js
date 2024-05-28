@@ -19,7 +19,7 @@ function History() {
                 setData(history);
                 dispatch({ type: 'reset history badger' });
             })
-    }, [])
+    })
 
     return (
         <>

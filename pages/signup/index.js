@@ -18,7 +18,6 @@ export default function SignUp() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const { signup } = useAuth();
-    const router = useRouter();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -35,12 +34,12 @@ export default function SignUp() {
                 })
                 const { uid, email } = auth.currentUser;
                 axios.post(process.env.DB + '/User/addUser', { displayName: auth.currentUser.displayName, uid, email })
-                    .then((res) => {
+                    .then(() => {
                         // router.push('/login')
                         // console.log(res);
                         setLoading(false);
                     })
-                    .catch(err => {
+                    .catch(() => {
                         // console.log(err);
                         setLoading(false);
                     })

@@ -11,8 +11,8 @@ import { auth } from '../../../firebase/firebase';
 import { StateContext } from '../../../Context/StateContext';
 import SnackbarTag from '../../../Components/Snackbar/Snackbar';
 import { columns } from '../../../Components/DataTabel/Items/Column';
-import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Link from "next/link";
 
 const Items = () => {
     const router = useRouter();
@@ -48,8 +48,8 @@ const Items = () => {
                         </div>
                     </div>
                     {medicineData.length !== 0 ? <DataTable data={medicineData} col={columns} /> : <>
-                        <h2 style={{ opacity: ".5" }}>You haven't added any medicine yet.</h2>
-                        <span style={{ opacity: '.5', fontWeight: '500' }}>Click here for add medicine - <a href='/user/purchase-medicine' style={{ color: 'blue' }}>Purchase medicine</a></span>
+                        <h2 style={{ opacity: ".5" }}>You haven&apos;t added any medicine yet.</h2>
+                        <span style={{ opacity: '.5', fontWeight: '500' }}>Click here for add medicine - <Link href='/user/purchase-medicine' style={{ color: 'blue' }}>Purchase medicine</Link></span>
                     </>}
                 </div>
             </div>
