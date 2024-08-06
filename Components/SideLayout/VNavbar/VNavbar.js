@@ -18,7 +18,7 @@ export default function Navbar() {
     // console.log(router.pathname.split('/')[2]);
 
     $(document).ready(function () {
-        $(`[page*=${!router.pathname.split('/')[2] ? "home" : router.pathname.split('/')[2]}]`).addClass(`${classes.active}`).siblings().removeClass(`${classes.active}`);
+        $(`[page*=${!router.pathname.split('/')[2] ? "welcome" : router.pathname.split('/')[2]}]`).addClass(`${classes.active}`).siblings().removeClass(`${classes.active}`);
     })
 
     return (

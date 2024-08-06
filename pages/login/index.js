@@ -22,7 +22,7 @@ export default function Login() {
         login(emailRef.current.value, passRef.current.value)
             .then((res) => {
                 if (res.user) {
-                    router.replace('/user')
+                    router.replace('/welcome')
                 }
                 setLoading(false);
             })
