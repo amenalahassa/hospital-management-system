@@ -4,8 +4,8 @@
  * @param {import('next').NextApiResponse} res 
  */
 
-// import Medicine from '../../../Models/medicine';
-import User from '../../../Models/user';
+// import Medicine from '../../../models/medicine';
+import User from '../../../models/user';
 import connectMongo from '../../../utils/connectMongo';
 
 export default async function add(req, res) {

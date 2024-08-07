@@ -1,5 +1,5 @@
 import classes from './report.module.css';
-import Navbar from "../../../Components/subNavbar/navbar";
+import Navbar from "../../../components/subNavbar/navbar";
 import Head from 'next/head';
 
 const Items = () => {

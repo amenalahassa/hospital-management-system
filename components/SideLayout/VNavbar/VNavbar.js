@@ -2,11 +2,11 @@ import classes from './vnavbar.module.css';
 import { FaBell, FaShapes, FaCartPlus, FaFileInvoice, FaChartPie } from 'react-icons/fa';
 import { MdDashboardCustomize } from 'react-icons/md'
 import $ from 'jquery';
-import logo from '../../../Images/MedAssist.png';
+import logo from '../../../images/MedAssist.png';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { StateContext } from '../../../Context/StateContext';
+import { StateContext } from '../../../contexts/StateContext';
 import { useContext } from 'react';
 
 export default function Navbar() {

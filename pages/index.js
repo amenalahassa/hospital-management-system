@@ -1,8 +1,8 @@
 import classes from '../styles/home.module.css';
 import Image from 'next/image';
-import easyToManage from '../Images/easyToManage.webp';
-import userFriendly from '../Images/userFriendly.webp';
-import alwaysImproving from '../Images/alwaysImproving.webp';
+import easyToManage from '../images/easyToManage.webp';
+import userFriendly from '../images/userFriendly.webp';
+import alwaysImproving from '../images/alwaysImproving.webp';
 import Head from 'next/head';
 import Login from "./login";
 

@@ -1,11 +1,11 @@
 import classes from './history.module.css';
 import React, { useEffect, useState, useContext } from 'react'
 import Head from 'next/head'
-import Navbar from '../../../Components/subNavbar/navbar';
+import Navbar from '../../../components/subNavbar/navbar';
 import axios from 'axios';
-import { auth } from '../../../firebase/firebase';
-import HistoryTable from '../../../Components/HistoryTable/HistoryTable';
-import { StateContext } from '../../../Context/StateContext';
+import { auth } from '../../../ressources/firebase';
+import HistoryTable from '../../../components/HistoryTable/HistoryTable';
+import { StateContext } from '../../../contexts/StateContext';
 
 
 function History() {

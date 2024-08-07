@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
-import { useAuth } from "../../firebase/Context/AuthContext"
+import { useAuthUser } from "../../contexts/authUserContext"
 import Loading from "../Loading/Loading";
 
 function AlreadyLogin({ children }) {
-    const { currentUser } = useAuth();
+    const { currentUser } = useAuthUser();
     const router = useRouter();
 
     if (currentUser) {

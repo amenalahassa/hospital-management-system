@@ -1,12 +1,12 @@
-import image from '../../Images/login.jpg'
+import image from '../../images/login.jpg'
 import Image from 'next/image';
 import classes from '../login/login.module.css';
 import { useRef, useState } from 'react';
 import Link from 'next/link';
-import { useAuth } from '../../firebase/Context/AuthContext';
+import { useAuthUser } from '../../contexts/authUserContext';
 import { useRouter } from 'next/router'
 import Head from 'next/head';
-import { auth } from '../../firebase/firebase';
+import { auth } from '../../ressources/firebase';
 import { updateProfile } from 'firebase/auth';
 import axios from 'axios';
 
@@ -17,7 +17,7 @@ export default function SignUp() {
     const conPassRef = useRef();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-    const { signup } = useAuth();
+    const { signup } = useAuthUser();
 
     const handleSubmit = (e) => {
         e.preventDefault();

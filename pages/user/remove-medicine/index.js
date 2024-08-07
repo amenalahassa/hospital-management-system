@@ -1,14 +1,14 @@
-import Navbar from "../../../Components/subNavbar/navbar";
+import Navbar from "../../../components/subNavbar/navbar";
 import classes from "./remove.module.css";
 import { Button, TextField } from '@mui/material'
 import Autocomplete from '@mui/material/Autocomplete';
-import NavigationBar from "../../../Components/SideLayout/Navigation/NavigationBar";
+import NavigationBar from "../../../components/SideLayout/Navigation/NavigationBar";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { auth } from "../../../firebase/firebase";
-import { StateContext } from "../../../Context/StateContext";
-import AlertDialog from '../../../Components/AlertDialog/AlertDialog'
+import { auth } from "../../../ressources/firebase";
+import { StateContext } from "../../../contexts/StateContext";
+import AlertDialog from '../../../components/AlertDialog/AlertDialog'
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Head from "next/head";

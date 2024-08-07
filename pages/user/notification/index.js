@@ -1,7 +1,7 @@
 import classes from './notification.module.css';
-import Navbar from "../../../Components/subNavbar/navbar";
+import Navbar from "../../../components/subNavbar/navbar";
 import Head from 'next/head';
-import DataTable from '../../../Components/DataTabel/DataTabel';
+import DataTable from '../../../components/DataTabel/DataTabel';
 
 const Items = () => {
     return (

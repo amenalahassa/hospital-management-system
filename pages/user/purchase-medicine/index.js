@@ -1,19 +1,19 @@
-import Navbar from "../../../Components/subNavbar/navbar";
+import Navbar from "../../../components/subNavbar/navbar";
 import classes from "./add_item.module.css";
 import { Button, TextField } from '@mui/material'
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import NavigationBar from "../../../Components/SideLayout/Navigation/NavigationBar";
+import NavigationBar from "../../../components/SideLayout/Navigation/NavigationBar";
 import { useContext, useState } from "react";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import axios from "axios";
 import { useRouter } from "next/router";
-import { auth } from "../../../firebase/firebase";
+import { auth } from "../../../ressources/firebase";
 import convertDate from "../../../utils/convertDate";
 import getCurrentDate from "../../../utils/getCurrentDate";
-import { StateContext } from "../../../Context/StateContext";
-import AlertDialog from '../../../Components/AlertDialog/AlertDialog'
+import { StateContext } from "../../../contexts/StateContext";
+import AlertDialog from '../../../components/AlertDialog/AlertDialog'
 import Head from "next/head";
 
 const AddItem = () => {

@@ -1,41 +1,42 @@
-import image from '../../Images/login.jpg'
+import image from '../../images/login.jpg'
 import Image from 'next/image';
 import classes from './login.module.css';
 import { useRef, useState } from 'react';
-import { useAuth } from '../../firebase/Context/AuthContext';
+import { useAuthUser } from '../../contexts/authUserContext';
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-import Loading from '../../Components/Loading/Loading';
+import Loading from '../../components/Loading/Loading';
+import {useAuthService} from "../../contexts/authContext";
+import {AuthActionType} from "../../reducers/authReducer";
 
 export default function Login() {
     const emailRef = useRef();
     const passRef = useRef();
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
-    const { login } = useAuth();
+    const authService = useAuthService();
+    const { authDispatcher } = useAuthUser();
     const router = useRouter();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setError("");
-        setLoading(true);
-        login(emailRef.current.value, passRef.current.value)
+        authDispatcher({ type: AuthActionType.LOAD });
+        authService.login(emailRef.current.value, passRef.current.value)
             .then((res) => {
                 if (res.user) {
                     router.replace('/welcome')
                 }
-                setLoading(false);
             })
             .catch((err) => {
+                // Todo: handle error with appropriate message and class
+                let message = "";
                 switch (err.code) {
                     case 'auth/wrong-password':
-                        setError('Mot de passe incorrect.....Veuillez réessayer')
+                        message = 'Mot de passe incorrect.....Veuillez réessayer';
                         break;
                     default:
-                        setError('Quelque chose n\'a pas fonctionné....Veuillez réessayer')
+                        message = 'Quelque chose n\'a pas fonctionné....Veuillez réessayer';
                         break;
                 }
-                setLoading(false);
+                authDispatcher({ type: AuthActionType.RAISE_ERROR, message });
             })
     }
 

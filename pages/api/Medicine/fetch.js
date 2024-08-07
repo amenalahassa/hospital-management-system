@@ -4,7 +4,7 @@
  * @param {import('next').NextApiResponse} res 
  */
 
-import User from '../../../Models/user';
+import User from '../../../models/user';
 import connectMongo from '../../../utils/connectMongo';
 
 

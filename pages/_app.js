@@ -1,14 +1,15 @@
 import '../styles/globals.css'
 import Home from '.';
-import TopLayout from '../Components/TopLayout/TopLayout';
+import TopLayout from '../components/TopLayout/TopLayout';
 import Login from './login';
 import SignUp from './signup';
-import SideLayout from '../Components/SideLayout/SideLayout';
-import AuthProvider from '../firebase/Context/AuthContext';
-import ProtectedRoute from '../Components/ProtectedRoute/ProtectedRoute';
-import AlreadyLogin from '../Components/AlreadyLogin/AlreadyLogin';
-import { StateContextProvider } from '../Context/StateContext';
+import SideLayout from '../components/SideLayout/SideLayout';
+import AuthUserProvider from '../contexts/authUserContext';
+import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute';
+import AlreadyLogin from '../components/AlreadyLogin/AlreadyLogin';
+import { StateContextProvider } from '../contexts/StateContext';
 import {NextUIProvider} from "@nextui-org/react";
+import AuthServiceProvider from "../contexts/authContext";
 
 
 // function MyApp({ Component, pageProps }) {
@@ -64,13 +65,13 @@ import {NextUIProvider} from "@nextui-org/react";
 function MyApp({ Component, pageProps }) {
   return (
       <NextUIProvider>
-          <AuthProvider>
-            <StateContextProvider>
-              {/*<AlreadyLogin>*/}
-                <Component {...pageProps} />
-              {/*</AlreadyLogin>*/}
-            </StateContextProvider>
-          </AuthProvider>
+          <AuthServiceProvider>
+              <AuthUserProvider>
+                  {/*<AlreadyLogin>*/}
+                  <Component {...pageProps} />
+                  {/*</AlreadyLogin>*/}
+              </AuthUserProvider>
+          </AuthServiceProvider>
       </NextUIProvider>
   );
 }

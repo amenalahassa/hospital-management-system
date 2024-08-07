@@ -1,16 +1,16 @@
 import classes from './items.module.css';
-import Navbar from "../../../Components/subNavbar/navbar";
+import Navbar from "../../../components/subNavbar/navbar";
 import Head from 'next/head';
-import DataTable from '../../../Components/DataTabel/DataTabel';
+import DataTable from '../../../components/DataTabel/DataTabel';
 import Button from '@mui/material/Button';
 import axios from 'axios'
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
-import { auth } from '../../../firebase/firebase';
+import { auth } from '../../../ressources/firebase';
 
-import { StateContext } from '../../../Context/StateContext';
-import SnackbarTag from '../../../Components/Snackbar/Snackbar';
-import { columns } from '../../../Components/DataTabel/Items/Column';
+import { StateContext } from '../../../contexts/StateContext';
+import SnackbarTag from '../../../components/Snackbar/Snackbar';
+import { columns } from '../../../components/DataTabel/Items/Column';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Link from "next/link";
 
