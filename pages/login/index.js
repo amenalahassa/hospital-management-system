@@ -8,21 +8,32 @@ import Head from 'next/head'
 import Loading from '../../components/Loading/Loading';
 import {useAuthService} from "../../contexts/authContext";
 import {AuthActionType} from "../../reducers/authReducer";
+import {Constants} from "../../utils/contants";
+import Home from "../workspace/home";
+import {RoutedComponent} from "../../utils/types";
 
-export default function Login() {
+const Login = () => {
     const emailRef = useRef();
     const passRef = useRef();
     const authService = useAuthService();
-    const { authDispatcher } = useAuthUser();
+    const { currentUser, authDispatcher } = useAuthUser();
     const router = useRouter();
+
+    const isLoadingUser = () => {
+        return currentUser.loading;
+    }
+
+    const authError = () => {
+        return currentUser.error;
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        authDispatcher({ type: AuthActionType.LOAD });
+        authDispatcher({ type: AuthActionType.LOAD_USER });
         authService.login(emailRef.current.value, passRef.current.value)
             .then((res) => {
                 if (res.user) {
-                    router.replace('/welcome')
+                    router.replace(Home.route);
                 }
             })
             .catch((err) => {
@@ -40,12 +51,13 @@ export default function Login() {
             })
     }
 
+    // Todo: Better error handling in UI
     return (
         <>
             <Head>
                 <title>S'authentifier | App Name</title>
             </Head>
-            {!loading && <div className={classes.main_container}>
+            <div className={classes.main_container}>
                 <div className={classes.img_container}>
                     <Image
                         src={image}
@@ -60,18 +72,23 @@ export default function Login() {
                         <h1>Authentification</h1>
                         <div className={classes.email_con}>
                             <label htmlFor="email">Entrez votre Email : </label>
-                            <input type="email" ref={emailRef} required id='email' placeholder='Email' />
+                            <input type="email" ref={emailRef} required id='email' placeholder='Email'/>
                         </div>
                         <div className={classes.pass_con}>
                             <label htmlFor="pass">Entrez votre mot de passe : </label>
-                            <input type="password" ref={passRef} required id='pass' placeholder='Mot de passe' autoComplete='true' />
+                            <input type="password" ref={passRef} required id='pass' placeholder='Mot de passe'
+                                   autoComplete='true'/>
                         </div>
-                        <label className={error === "" ? "hidden" : ""}>* {error}</label>
-                        <button type='submit' disabled={loading} className={loading ? classes.disable : ""}>{loading ? "Chargement..." : "Ouvrir une session"}</button>
+                        <label className={authError() === "" ? "hidden" : ""}>* {authError()}</label>
+                        <button type='submit' disabled={isLoadingUser()}
+                                className={isLoadingUser() ? classes.disable : ""}>{isLoadingUser() ? "Chargement..." : "Ouvrir une session"}</button>
                     </form>
                 </div>
-            </div >}
-            {loading && <Loading />}
+            </div>
         </>
     )
 }
+
+Login.route = Constants.APP_ROUTES.LOGIN;
+
+export default Login;

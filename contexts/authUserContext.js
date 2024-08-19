@@ -1,24 +1,28 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
 import { AuthActionType, authReducer } from "../reducers/authReducer";
-import { onAuthStateChanged } from "firebase/auth";
 import { useAuthService } from "./authContext";
 import {DataValue} from "../models/value";
+import { getAuth } from "firebase/auth";
 
-const AuthUserContext = createContext({});
+const AuthUserContext = createContext({
+    currentUser: new DataValue(null, false, null),
+    authDispatcher: () => {}
+});
 export function useAuthUser() {
     return useContext(AuthUserContext);
 }
 
 export default function AuthUserProvider({ children }) {
     const authService = useAuthService()
-    const [currentUser, authDispatcher] = useReducer(authReducer, new DataValue(authService.getCurrentUser(), false, null));
+    const authProvider = getAuth();
+    const [currentUser, authDispatcher ] = useReducer(authReducer, new DataValue(authService.authUser, false, null));
 
     useEffect(() => {
-        return onAuthStateChanged(authService, user => {
+        return authProvider.onAuthStateChanged(user => {
             if (user) {
-                authDispatcher({type: AuthActionType.CONNECT, user});
+                authDispatcher({type: AuthActionType.SET_USER, user});
             } else {
-                authDispatcher({type: AuthActionType.DISCONNECT});
+                authDispatcher({type: AuthActionType.REMOVE_USER});
             }
         });
     })

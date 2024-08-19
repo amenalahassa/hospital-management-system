@@ -1,79 +1,55 @@
 import '../styles/globals.css'
-import Home from '.';
-import TopLayout from '../components/TopLayout/TopLayout';
+import Welcome from '.';
+import PublicPageLayout from '../components/TopLayout/PublicPageLayout';
 import Login from './login';
-import SignUp from './signup';
 import SideLayout from '../components/SideLayout/SideLayout';
 import AuthUserProvider from '../contexts/authUserContext';
-import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute';
+import AuthUserGuard from '../guards/AuthUserGuard';
 import AlreadyLogin from '../components/AlreadyLogin/AlreadyLogin';
-import { StateContextProvider } from '../contexts/StateContext';
 import {NextUIProvider} from "@nextui-org/react";
 import AuthServiceProvider from "../contexts/authContext";
 
-
-// function MyApp({ Component, pageProps }) {
-//   switch (Component) {
-//     case Home: {
-//       return (
-//         <AuthProvider>
-//           <StateContextProvider>
-//             <AlreadyLogin>
-//               <TopLayout>
-//                 <Component {...pageProps} />
-//               </TopLayout>
-//             </AlreadyLogin>
-//           </StateContextProvider>
-//         </AuthProvider>
-//       );
-//     }
-//     case (Login):
-//       return (
-//         <AuthProvider>
-//           <StateContextProvider>
-//             <AlreadyLogin>
-//               <Component {...pageProps} />
-//             </AlreadyLogin>
-//           </StateContextProvider>
-//         </AuthProvider>
-//       );
-//     case (SignUp):
-//       return (
-//         <AuthProvider>
-//           <StateContextProvider>
-//             <AlreadyLogin>
-//               <Component {...pageProps} />
-//             </AlreadyLogin>
-//           </StateContextProvider>
-//         </AuthProvider>
-//       );
-//     default:
-//       return (
-//         <AuthProvider>
-//           <StateContextProvider>
-//             <ProtectedRoute>
-//               <SideLayout>
-//                 <Component {...pageProps} />
-//               </SideLayout>
-//             </ProtectedRoute>
-//           </StateContextProvider>
-//         </AuthProvider>
-//       )
-//   }
-// }
+function AppWrapper({ children }) {
+    return (
+        <NextUIProvider>
+            <AuthServiceProvider>
+                <AuthUserProvider>
+                    {children}
+                </AuthUserProvider>
+            </AuthServiceProvider>
+        </NextUIProvider>
+    )
+}
 
 function MyApp({ Component, pageProps }) {
-  return (
-      <NextUIProvider>
-          <AuthServiceProvider>
-              <AuthUserProvider>
-                  {/*<AlreadyLogin>*/}
-                  <Component {...pageProps} />
-                  {/*</AlreadyLogin>*/}
-              </AuthUserProvider>
-          </AuthServiceProvider>
-      </NextUIProvider>
-  );
+    switch (Component) {
+        case Welcome:
+            return (
+                <AppWrapper>
+                    <PublicPageLayout>
+                        <Component {...pageProps} />
+                    </PublicPageLayout>
+                </AppWrapper>
+            );
+        case Login:
+            return (
+                <AppWrapper>
+                    <AlreadyLogin>
+                        <Component {...pageProps} />
+                    </AlreadyLogin>
+                </AppWrapper>
+            );
+        default:
+            return (
+                <AppWrapper>
+                    <AuthUserGuard>
+                        <SideLayout>
+                            <Component {...pageProps} />
+                        </SideLayout>
+                    </AuthUserGuard>
+                </AppWrapper>
+            );
+    }
 }
 
 export default MyApp

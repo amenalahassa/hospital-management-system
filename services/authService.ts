@@ -15,7 +15,11 @@ export class AuthService {
         this.provider = authProvider;
     }
 
-    getCurrentUser() {
+    get authProvider() {
+        return this.provider;
+    }
+
+    get authUser() {
         return this.provider.currentUser;
     }
 
@@ -36,10 +40,10 @@ export class AuthService {
     }
 
     updateEmail(email) {
-        return updateEmail(this.getCurrentUser(), email);
+        return updateEmail(this.authUser(), email);
     }
 
     updatePassword(password) {
-        return updatePassword(this.getCurrentUser(), password);
+        return updatePassword(this.authUser(), password);
     }
 }
